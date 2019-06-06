@@ -2,23 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" type="text/css" href="reset.css">
-    <script src="todo.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <script src="js/todo.js"></script>
     <title>ToDo List</title>
   </head>
   <body>
-
-<input id="task"><button id="add">Add</button>
-<div id="todos">
-    <UL id="todo">
-            <Li>Add HTML list to Index</Li>
-            <Li>Add text form for adding new item to the list</Li>
-            <Li>Add Submit button</Li>
-            <Li>Add check-boxes to list items</Li>
-            <Li>Add delete icon to list items</Li>
-        </UL>
-</div> 
+      <div class="addDIV">
+        
+            <input type="text" id="usrInput" placeholder="Title..."><button id="add" class ="addBtn">Add</button>
+    </div>
   
+        <UL id="todo">
+                <Li>Feed the dog</Li>
+                <Li>Feed the cat </Li>
+                <Li>Feed kids</Li>
+
+        </UL> 
   </body>
 </html>
