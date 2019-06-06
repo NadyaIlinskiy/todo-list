@@ -37,6 +37,17 @@ document.addEventListener("DOMContentLoaded", function() {
     if(localStorage.getItem("myToDoList")){   
         myList.innerHTML = localStorage.getItem("myToDoList");
     }
+    let toDolist = document.getElementsByTagName("Li");
+    //adding "X" to every Li as "close" icon
+        for (let i = 0; i < toDolist.length; i++) {
+        let span = document.createElement("span");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        toDolist[i].appendChild(span);
+        }
+    
+
 }
 
 
