@@ -1,5 +1,5 @@
  
-/////////////// should waiting for DOM loading be part of every script?
+/////////////// should waiting for DOM loading be part of every func?
 document.addEventListener("DOMContentLoaded", function() {
     addTodo();
     loadTodo();
@@ -21,18 +21,20 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(newTask);
         newLi.appendChild(newTask);
         document.getElementById("todo").appendChild(newLi);
+
+//saving updated list to localStorage
         let myList = document.querySelector("ul");
         localStorage.setItem ("myToDoList", myList.innerHTML);
         
     });
    document.getElementById("usrInput").value = "";
    
-
  }
 
+ //loading my ToDo list from localStorage (if exists)
  function loadTodo(){
-    if(localStorage.getItem("myToDoList")){
-        let myList = document.querySelector("ul");
+    let myList = document.querySelector("ul");    
+    if(localStorage.getItem("myToDoList")){   
         myList.innerHTML = localStorage.getItem("myToDoList");
     }
 }
