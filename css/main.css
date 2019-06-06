@@ -66,8 +66,7 @@ body {
   }
   
   .close:hover {
-    background-color: #f44336;
-    color: white;
+    color: red;
   }
   
   /* Style the Add Task */
