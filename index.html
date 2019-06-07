@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <script src="js/todo.js"></script>
     <title>ToDo List</title>
   </head>
   <body>
       <div class="addDIV">
-        
-            <input type="text" id="usrInput" placeholder="Title..."><button id="add" class ="addBtn">Add</button>
+        <form id = "usrInput">
+            <input type="text" id="taskName" placeholder="Title...">
+            <input type="text" id="taskPoints" placeholder="Title...">
+            <button id="addTask" type="submit" class ="addBtn">Add</button>
+        </form>
     </div>
   
-        <UL id="todo">
-                <Li>Feed the dog</Li>
-                <Li>Feed the cat </Li>
-                <Li>Feed kids</Li>
-
-        </UL> 
+        <ul id="todo">
+         
+        </ul> 
+        <script src="js/todo.js"></script>
   </body>
 </html>
