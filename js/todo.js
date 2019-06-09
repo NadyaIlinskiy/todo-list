@@ -1,9 +1,9 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
 let allTasks = []; 
 let ulEl = document.getElementById('todo');
 let usrForm = document.getElementById('usrInput'); 
+
 function Task (name, points){ 
     
     this.name = name;
@@ -46,23 +46,21 @@ function createTask(event){
 
 function deleteTask(event){
     event.preventDefault();
-    let path = event.path[1].innerHTML;
-    console.log(path.path);
-    let slicedPath = path.slice(28);
+    let path = event.path[1].textContent; // textContent is better then innerHTML :)
+    console.log('path: ', path);
+    let slicedPath = path.slice(1); //1 is better then 28 :D 
     console.log(slicedPath);
 
     //homeWork
     let a = localStorage.getItem ('allTasks');
     let parsedTasks = JSON.parse(a);
-      
-    // DELETE ONE TASKS -> array.filter - method use to delete 
+
+    // DELETE ONE TASK -> array.filter - method use to delete 
          
-    localStorage.setItem ('allTasks');
-    checkLocalStorage(); 
-    document.reload();
+    // localStorage.setItem ('allTasks');
+    // checkLocalStorage(); 
+    // document.reload();
 
-
-    //
    
 }
 usrForm.addEventListener('submit', createTask);
@@ -80,74 +78,3 @@ function checkLocalStorage (){
     }
 }
 checkLocalStorage();
-
-
-// /////////////// should waiting for DOM loading be part of every func (no need for EL)
-// document.addEventListener("DOMContentLoaded", function() {
-//     addTodo();
-//     loadTodo();
-//     deleteTodo();
-//   });
-
-
-
-
-// // on click Add button -  add new todo (text from input to the todo list)
-
-//  function addTodo(){
-
-// ////////////////per book (p223)
- 
-//     let submitButton = document.getElementById("add");
-//     submitButton.addEventListener ("click", function() {
-
-//         let newLi = document.createElement("Li");
-//         let userInput = document.getElementById("usrInput").value;
-//         let newTask = document.createTextNode(userInput);
-        
-//         console.log(newTask);
-//         newLi.appendChild(newTask);
-//         document.getElementById("todo").appendChild(newLi);
-
-// //saving updated list to localStorage
-//         let myList = document.querySelector("ul");
-//         localStorage.setItem ("myToDoList", myList.innerHTML);
-        
-//     });
-//    document.getElementById("usrInput").value = "";
-   
-//  }
-
-//  //loading my ToDo list from localStorage (if exists)
-//  function loadTodo(){
-//     let myList = document.querySelector("ul");    
-//     if(localStorage.getItem("myToDoList")){   
-//         myList.innerHTML = localStorage.getItem("myToDoList");
-//     }
-//     let toDolist = document.getElementsByTagName("Li");
-//     //adding "X" to every Li as "close" icon
-//         for (let i = 0; i < toDolist.length; i++) {
-//         let span = document.createElement("span");
-//         let txt = document.createTextNode("\u00D7");
-//         span.className = "close";
-//         span.appendChild(txt);
-//         toDolist[i].appendChild(span);
-//         }
-    
-
-// }
-
-
-// //on click Delete "X" button remove item from the todo list. Book p225
-// // function deleteTodo(){
-
-// //     let removeToDo = document.getElementsByClassName("close");
-// //     removeToDo.addEventListener ("click", function() {
-// //     for (let i = 0; i < removeToDo.length; i++) {     
-// //         let removeLi = i.parentElement;
-// //        // let conteinter
-// //     }
-// //     })
-// // }
-
-
