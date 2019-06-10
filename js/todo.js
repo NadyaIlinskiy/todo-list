@@ -4,6 +4,11 @@
 // 1. if there're tasks with same name - they all gonna be deleted on deleteTask action 
 // (that's how 'filter' method works)
 
+//////TODO//////
+//1. Render sum of done tasks points somewhere
+//2. Update sum of done tasks points on delete
+//3. Update sum of done tasks points on mark task done
+
 
 let allTasks = []; 
 let ulEl = document.getElementById('todo');
