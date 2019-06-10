@@ -94,7 +94,6 @@ function deleteTask(event){
     let newTasks = parsedTasks.filter(el => el.name !== taskName);
          
     localStorage.setItem ('allTasks', JSON.stringify(newTasks));
-    checkLocalStorage(); 
     location.reload();
   
 }
@@ -125,8 +124,9 @@ function changeTaskSate(event){
 usrForm.addEventListener('submit', createTask);
 
 function checkLocalStorage (){
+    let parsedTasks =[];
     let storedTasks = localStorage.getItem('allTasks');
-    let parsedTasks = JSON.parse(storedTasks);
+    parsedTasks = JSON.parse(storedTasks);
 
     console.log ('parsed tasks', parsedTasks);
 
