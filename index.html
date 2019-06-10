@@ -9,8 +9,12 @@
   <body>
       <div class="addDIV">
         <form id = "usrInput">
-            <input type="text" id="taskName" placeholder="Title...">
-            <input type="text" id="taskPoints" placeholder="Title...">
+            <input type="text" id="taskName" placeholder="Task Title">
+            <span id="name-error"></span>
+            <br>
+            <input type="text" id="taskPoints" placeholder="1 to 5 Points">
+            <span id="points-error"></span>
+            <br>
             <button id="addTask" type="submit" class ="addBtn">Add</button>
         </form>
     </div>
