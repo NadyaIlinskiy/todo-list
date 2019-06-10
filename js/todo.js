@@ -41,7 +41,7 @@ function addElement (element, text, parent){
     checkbox.className = 'check';
     parent.append(newElement);
     span.addEventListener('click', deleteTask);
- //   checkForm.addEventListener('change', changeTaskSate);
+    checkForm.addEventListener('change', changeTaskSate);
     return newElement;
 }
 
@@ -90,26 +90,27 @@ function deleteTask(event){
   
 }
 
-// function changeTaskSate(event){
-//     event.preventDefault();
-//     let liText = event.path[1].textContent; 
-//     console.log('path: ', event.path[2]);
-//     let taskName = liText.slice(1); 
-//     console.log(taskName);
-//     let checked = checkbox.checked;
-//     console.log('Checked', checked);
+function changeTaskSate(event){
 
-//     let storedTasks = localStorage.getItem ('allTasks');
-//     let parsedTasks = JSON.parse(storedTasks);
-
-//     let newTasks = [];
+    let liText = event.path[2].textContent; 
+    event.path[2].className = 'checked';
+    let taskName = liText.slice(1); 
+    console.log(taskName);
+    let storedTasks = localStorage.getItem ('allTasks');
+    let parsedTasks = JSON.parse(storedTasks);
     
-         
-//     localStorage.setItem ('allTasks', JSON.stringify(newTasks));
-//     checkLocalStorage(); 
-
+    let doneTaskIndex = parsedTasks.findIndex(el => el.name === taskName);
+    let doneTask = parsedTasks.find(el => el.name === taskName);
+    if (doneTask.isDone === true){
+        doneTask.isDone = false;
+    } else{
+        doneTask.isDone = true;
+    }
+    parsedTasks[doneTaskIndex] = doneTask;
+    localStorage.setItem ('allTasks', JSON.stringify(parsedTasks));
+    console.log(parsedTasks);
   
-// }
+}
 
 usrForm.addEventListener('submit', createTask);
 
