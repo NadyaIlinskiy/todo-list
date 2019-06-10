@@ -28,25 +28,29 @@ function addElement (element, text, parent){
     let newText = document.createTextNode(text);
     let span = document.createElement('span');
     let txt = document.createTextNode('\u00D7');
-    let checkForm = document.createElement('form');
     let checkbox = document.createElement('input');
-    checkForm.id = 'checkForm';
     checkbox.type = 'checkbox';
-    checkForm.append(checkbox);
     span.append(txt);  
     newElement.append(span);
     newElement.append(newText);
-    newElement.append(checkForm);
+    newElement.append(checkbox);
     span.className = 'close';
     checkbox.className = 'check';
     parent.append(newElement);
     span.addEventListener('click', deleteTask);
-    checkForm.addEventListener('change', changeTaskSate);
+    checkbox.addEventListener('change', changeTaskSate);
     return newElement;
 }
 
 function render (name){
     addElement('li', name, ulEl);
+}
+function renderDone(name){
+    let li = addElement('li', name, ulEl);
+    li.className = 'checked';
+    let checkbox = li.childNodes[2];
+    console.log('RENDER DONE', checkbox);
+    checkbox.checked = true;
 }
 
 function createTask(event){
@@ -92,8 +96,7 @@ function deleteTask(event){
 
 function changeTaskSate(event){
 
-    let liText = event.path[2].textContent; 
-    event.path[2].className = 'checked';
+    let liText = event.path[1].textContent; 
     let taskName = liText.slice(1); 
     console.log(taskName);
     let storedTasks = localStorage.getItem ('allTasks');
@@ -103,18 +106,18 @@ function changeTaskSate(event){
     let doneTask = parsedTasks.find(el => el.name === taskName);
     if (doneTask.isDone === true){
         doneTask.isDone = false;
+        event.path[1].className = 'not-checked';
     } else{
         doneTask.isDone = true;
+        event.path[1].className = 'checked';
+        event.path[0].checked;
     }
     parsedTasks[doneTaskIndex] = doneTask;
     localStorage.setItem ('allTasks', JSON.stringify(parsedTasks));
-    console.log(parsedTasks);
-  
+    console.log(parsedTasks); 
 }
 
 usrForm.addEventListener('submit', createTask);
-
-
 
 function checkLocalStorage (){
     let storedTasks = localStorage.getItem('allTasks');
@@ -124,7 +127,12 @@ function checkLocalStorage (){
 
     parsedTasks.forEach(el => {
         allTasks.push(el);
-        render(el.name);
+        
+        if (el.isDone === true){
+            renderDone(el.name);
+        } else {
+            render(el.name);
+        }
     });
     
     console.log ('All tasks', allTasks);

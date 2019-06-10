@@ -41,6 +41,12 @@ body {
     background: #888;
     color: #fff;
     text-decoration: line-through;
+
+  }
+  ul li.not-checked {
+    
+    text-decoration: none;
+
   }
   
   /* Style the delete button */
