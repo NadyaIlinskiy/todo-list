@@ -25,15 +25,23 @@ Task.prototype.renderNew = function(){
 
 function addElement (element, text, parent){
     let newElement = document.createElement(element);
-    let newText =document.createTextNode(text);
+    let newText = document.createTextNode(text);
     let span = document.createElement('span');
     let txt = document.createTextNode('\u00D7');
-    span.append(txt);
+    let checkForm = document.createElement('form');
+    let checkbox = document.createElement('input');
+    checkForm.id = 'checkForm';
+    checkbox.type = 'checkbox';
+    checkForm.append(checkbox);
+    span.append(txt);  
     newElement.append(span);
     newElement.append(newText);
+    newElement.append(checkForm);
     span.className = 'close';
+    checkbox.className = 'check';
     parent.append(newElement);
     span.addEventListener('click', deleteTask);
+ //   checkForm.addEventListener('change', changeTaskSate);
     return newElement;
 }
 
@@ -48,35 +56,33 @@ function createTask(event){
     if (points===''){
         points = 1;
     }
-    let userError = document.getElementById('points-error');
+  
+    let userError = document.getElementById('entery-error');
     //validation error on points if user enters something that not number btween 1 and 5
     let validPoints = [1,2,3,4,5];
-    if(!(validPoints.includes(+points))){
+    if(!(validPoints.includes(+points)) || name===''){
         userError.textContent = 'Invalid enrty';
-        userError.style.color = 'red';
-        event.target[1].style.borderColor = 'red';
-        event.target[1].focus();
     } else{
-
         let newTask = new Task (name, points);
         console.log(newTask);
         newTask.renderNew();
         localStorage.setItem ('allTasks', JSON.stringify(allTasks));
+        name ='';
+        points='';
     }
+   
 }
 
 function deleteTask(event){
     event.preventDefault();
-    let liText = event.path[1].textContent; // textContent is better then innerHTML :)
+    let liText = event.path[1].textContent; 
     console.log('path: ', event.path[2]);
-    let taskName = liText.slice(1); //1 is better then 28 :D 
+    let taskName = liText.slice(1); 
     console.log(taskName);
 
     //homeWork
     let storedTasks = localStorage.getItem ('allTasks');
-    let parsedTasks = JSON.parse(storedTasks);
-
-    // DELETE ONE TASK -> array.filter - method use to delete 
+    let parsedTasks = JSON.parse(storedTasks); 
     let newTasks = parsedTasks.filter(el => el.name !== taskName);
          
     localStorage.setItem ('allTasks', JSON.stringify(newTasks));
@@ -84,7 +90,30 @@ function deleteTask(event){
     location.reload();
   
 }
+
+// function changeTaskSate(event){
+//     event.preventDefault();
+//     let liText = event.path[1].textContent; 
+//     console.log('path: ', event.path[2]);
+//     let taskName = liText.slice(1); 
+//     console.log(taskName);
+//     let checked = checkbox.checked;
+//     console.log('Checked', checked);
+
+//     let storedTasks = localStorage.getItem ('allTasks');
+//     let parsedTasks = JSON.parse(storedTasks);
+
+//     let newTasks = [];
+    
+         
+//     localStorage.setItem ('allTasks', JSON.stringify(newTasks));
+//     checkLocalStorage(); 
+
+  
+// }
+
 usrForm.addEventListener('submit', createTask);
+
 
 
 function checkLocalStorage (){
@@ -99,8 +128,6 @@ function checkLocalStorage (){
     });
     
     console.log ('All tasks', allTasks);
-   
-
-   
+  
 }
 checkLocalStorage();
