@@ -67,8 +67,7 @@ function createTask(event){
         console.log(newTask);
         newTask.renderNew();
         localStorage.setItem ('allTasks', JSON.stringify(allTasks));
-        name ='';
-        points='';
+        location.reload();
     }
    
 }
