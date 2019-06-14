@@ -131,7 +131,7 @@ function changeTaskSate(event){
 
 function pointsSum (tasks){
     let points = tasks.map(el => +el.points);
-    let sum = points.reduce((a,b) => +a+b, 0); 
+    let sum = points.reduce((a,b) => a+b, 0); 
     return sum;
 }
 
