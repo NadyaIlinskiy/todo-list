@@ -12,8 +12,14 @@
             <input type="text" id="taskName" class ="task" placeholder="Task Title"> 
             <input type="text" id="taskPoints" class = "points" placeholder="1 to 5 Points"> 
             <button id="addTask" type="submit" class ="addBtn">Add</button>
-            <span id="entery-error" class="error"></span>
+            <div id = "errors">
+            <span id="empty-name-error" class="error"></span>
+            <span id="dupe-error" class="error"></span>
+            <span id="invalid-points-error" class="error"></span>
+          </div>
         </form>
+        <p id="points"></p>
+
     </div>
   
         <ul id="todo">

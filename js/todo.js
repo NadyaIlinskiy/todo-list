@@ -1,8 +1,4 @@
 'use strict';
-////////known bugs ////// 
-
-// 1. if there're tasks with same name - they all gonna be deleted on deleteTask action 
-// (that's how 'filter' method works)
 
 //////TODO//////
 //1. Render sum of done tasks points somewhere
@@ -61,22 +57,34 @@ function renderDone(name){
 function createTask(event){
     event.preventDefault();
     let name = event.target[0].value;
-    let points = event.target[1].value;
-    if (points===''){
-        points = 1;
-    }
-  
-    let userError = document.getElementById('entery-error');
+    let points = event.target[1].value; 
+    let dupeError = document.getElementById('dupe-error');
+    // The map() method creates a new array with the results of calling
+    // a provided function on every element in the calling array.
+    let taskNames = allTasks.map(el => el.name); 
+    let pointsError = document.getElementById('invalid-points-error');
+    let taskError = document.getElementById('empty-name-error');
     //validation error on points if user enters something that not number btween 1 and 5
     let validPoints = [1,2,3,4,5];
-    if(!(validPoints.includes(+points)) || name===''){
-        userError.textContent = 'Invalid enrty';
-    } else{
+    if (points===''){ //setting default points
+        points = 1;
+    }
+    if(!(validPoints.includes(+points))){
+        pointsError.textContent = 'Points obly can be numbers between 1 and 5. ';
+       
+    }else if (name==='') {      
+        taskError.textContent = 'Task name can\'t be empty. ';
+      
+    } else if (taskNames.includes(name)){
+        dupeError.textContent = '"'+name+'" already exists in your ToDo list';
+      
+    }
+    else{   
         let newTask = new Task (name, points);
-        console.log(newTask);
         newTask.renderNew();
         localStorage.setItem ('allTasks', JSON.stringify(allTasks));
-        location.reload();
+        usrForm.reset(); //clear the input form
+        document.getElementById('errors').style.display = 'none'; //hide validations
     }
    
 }
@@ -88,15 +96,16 @@ function deleteTask(event){
     let taskName = liText.slice(1); 
     console.log(taskName);
 
-    //homeWork
     let storedTasks = localStorage.getItem ('allTasks');
     let parsedTasks = JSON.parse(storedTasks); 
     let newTasks = parsedTasks.filter(el => el.name !== taskName);
          
     localStorage.setItem ('allTasks', JSON.stringify(newTasks));
     location.reload();
-  
+   
 }
+
+// find a way to get rid of repeted parts of the code in deleteTask & changeTaskState functions
 
 function changeTaskSate(event){
 
@@ -123,24 +132,21 @@ function changeTaskSate(event){
 
 usrForm.addEventListener('submit', createTask);
 
-function checkLocalStorage (){
-    let parsedTasks =[];
+function checkLocalStorage (){  
     let storedTasks = localStorage.getItem('allTasks');
-    parsedTasks = JSON.parse(storedTasks);
+    let parsedTasks = JSON.parse(storedTasks);
 
-    console.log ('parsed tasks', parsedTasks);
-
-    parsedTasks.forEach(el => {
-        allTasks.push(el);
+    if (parsedTasks !== null) { //check to prevent JS error if localStorage is empty 
+        parsedTasks.forEach(el => {
+            allTasks.push(el);
         
-        if (el.isDone === true){
-            renderDone(el.name);
-        } else {
-            render(el.name);
-        }
-    });
+            if (el.isDone === true){
+                renderDone(el.name);
+            } else {
+                render(el.name);
+            }
+        });
     
-    console.log ('All tasks', allTasks);
-  
+    }
 }
 checkLocalStorage();
