@@ -69,8 +69,15 @@ body {
   }
 
   .error{
-    color: red;
+    color: red; 
   }
+  .errors{
+    position: relative;
+    clear: left;
+    text-align: center;
+   
+  }
+
   /* Style the Add Task */
   .addDIV {
     background-color: #ccc;
@@ -130,8 +137,11 @@ body {
    /* Style the "Points" section */
    
    .earned-points{
+     background-color: #d9d9d9;
+     padding: 10px;
      text-align: center;
      color: #000;
      font-size: 14px;
      font-style: italic;
+     float: bottom;
    }
