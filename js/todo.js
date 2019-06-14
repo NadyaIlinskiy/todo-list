@@ -141,8 +141,6 @@ function addPoints(){
     let allTasksPointsSum = pointsSum (allTasks);
     let txt = 'You\'ve earned '+ doneTasksPointsSum +' points, out of '+allTasksPointsSum;
     points.append(txt);
-    console.log("done", doneTasks);
-    console.log("all", allTasks);
 }
 
 function checkLocalStorage (){  
