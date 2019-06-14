@@ -1,7 +1,7 @@
 # todo-list
 Vanilla JavaScript Excersise
 
-*The app:*
+*ToDo list app:*
 - renders list of "todo" items
 - has form to add new item to the "todo" list: name and points
 - renders sum of done tasks points and all tasks points
