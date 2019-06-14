@@ -130,8 +130,8 @@ function changeTaskSate(event){
 }
 
 function pointsSum (tasks){
-    let points = tasks.map(el => el.points);
-    let sum = points.reduce((a,b) => a+b, 0); 
+    let points = tasks.map(el => +el.points);
+    let sum = points.reduce((a,b) => +a+b, 0); 
     return sum;
 }
 
@@ -139,8 +139,10 @@ function addPoints(){
     let doneTasks = getDoneTasks();
     let doneTasksPointsSum = pointsSum (doneTasks);
     let allTasksPointsSum = pointsSum (allTasks);
-    let txt = 'You\'ve earned '+ doneTasksPointsSum +' points, out of '+allTasksPointsSum+ ' total.';
+    let txt = 'You\'ve earned '+ doneTasksPointsSum +' points, out of '+allTasksPointsSum;
     points.append(txt);
+    console.log("done", doneTasks);
+    console.log("all", allTasks);
 }
 
 function checkLocalStorage (){  
