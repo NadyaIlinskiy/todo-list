@@ -9,6 +9,8 @@
 let allTasks = []; 
 let ulEl = document.getElementById('todo');
 let usrForm = document.getElementById('usrInput'); 
+usrForm.addEventListener('submit', createTask);
+checkLocalStorage();
 
 function Task (name, points){ 
 
@@ -21,7 +23,6 @@ function Task (name, points){
 
 Task.prototype.renderNew = function(){
     addElement('li', this.name, ulEl);
-    console.log('render new', this);
 };
 
 function addElement (element, text, parent){
@@ -50,7 +51,6 @@ function renderDone(name){
     let li = addElement('li', name, ulEl);
     li.className = 'checked';
     let checkbox = li.childNodes[2];
-    console.log('RENDER DONE', checkbox);
     checkbox.checked = true;
 }
 
@@ -92,10 +92,7 @@ function createTask(event){
 function deleteTask(event){
     event.preventDefault();
     let liText = event.path[1].textContent; 
-    console.log('path: ', event.path[2]);
     let taskName = liText.slice(1); 
-    console.log(taskName);
-
     let storedTasks = localStorage.getItem ('allTasks');
     let parsedTasks = JSON.parse(storedTasks); 
     let newTasks = parsedTasks.filter(el => el.name !== taskName);
@@ -111,7 +108,6 @@ function changeTaskSate(event){
 
     let liText = event.path[1].textContent; 
     let taskName = liText.slice(1); 
-    console.log(taskName);
     let storedTasks = localStorage.getItem ('allTasks');
     let parsedTasks = JSON.parse(storedTasks);
     
@@ -127,10 +123,9 @@ function changeTaskSate(event){
     }
     parsedTasks[doneTaskIndex] = doneTask;
     localStorage.setItem ('allTasks', JSON.stringify(parsedTasks));
-    console.log(parsedTasks); 
 }
 
-usrForm.addEventListener('submit', createTask);
+
 
 function checkLocalStorage (){  
     let storedTasks = localStorage.getItem('allTasks');
@@ -149,4 +144,4 @@ function checkLocalStorage (){
     
     }
 }
-checkLocalStorage();
+
