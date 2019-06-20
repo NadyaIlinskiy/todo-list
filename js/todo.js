@@ -3,10 +3,9 @@
 let allTasks = []; 
 let ulEl = document.getElementById('todo');
 let usrForm = document.getElementById('usrInput'); 
-usrForm.addEventListener('submit', createTask);
 let points = document.getElementById('points');
-checkLocalStorage();
-addPoints();
+
+usrForm.addEventListener('submit', createTask);
 
 
 function Task (name, points){ 
@@ -56,8 +55,6 @@ function createTask(event){
     let name = event.target[0].value;
     let points = event.target[1].value; 
     let dupeError = document.getElementById('dupe-error');
-    // The map() method creates a new array with the results of calling
-    // a provided function on every element in the calling array.
     let taskNames = allTasks.map(el => el.name); 
     let pointsError = document.getElementById('invalid-points-error');
     let taskError = document.getElementById('empty-name-error');
@@ -159,3 +156,5 @@ function checkLocalStorage (){
     }
 }
 
+checkLocalStorage();
+addPoints();
